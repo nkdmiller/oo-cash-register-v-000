@@ -10,7 +10,7 @@ class CashRegister
   def add_item(title, price, quantity = 1)
     @total += price * quantity
     while quantity > 0
-      @items << title
+      @items << [title,price]
       quantity -= 1
     end
   end
@@ -25,7 +25,16 @@ class CashRegister
   end
 
   def items
-    return @items
+    list = []
+    @items.each do |item|
+      list << item[0]
+    end
+    return list
+  end
+
+  def void_last_transaction
+    last = @item[-1][0]
+    @total -= last
   end
 
 end
